@@ -18,12 +18,9 @@ module Mailgun
         end
 
         # add members
-        def add_member(address, name, vars, subscribed=true, upsert=false)
-            @client.post("lists/#{address}/members",{
-                address: address,
-                name: name,
-                vars: vars,
-                subscribed: subscribed,
+        def add_member(address, members=[],upsert = false)
+            @client.post("lists/#{address}/members.json",{
+                members: members.to_json,
                 upsert: upsert
             }).to_h
         end
